@@ -156,6 +156,19 @@ void mergeSort(int arr[], int start, int end)
     }
 }
 
+bool checkIfArrayIsSorted(int arr[], int numbers)
+{
+    bool isSorted = true;
+    for (int i = 0; i < numbers - 1; i++)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            return false;
+        }
+    }
+    return isSorted;
+}
+
 int main()
 {
     int numbers = 0;
@@ -189,6 +202,7 @@ int main()
     sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
 
     cout << endl << "Bubble sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr1, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
 
     cout << "<<QUICKSORT>>" << endl;
     start = clock();
@@ -197,6 +211,7 @@ int main()
     sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
 
     cout << endl << "Quicksort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr2, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
 
     cout << "<<SELECTION SORT>>" << endl;
     start = clock();
@@ -205,6 +220,7 @@ int main()
     sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
 
     cout << endl << "Selection sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr3, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
 
     cout << "<<INSERTION SORT>>" << endl;
     start = clock();
@@ -213,6 +229,7 @@ int main()
     sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
 
     cout << endl << "Insertion sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr4, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
 
     cout << "<<MERGE SORT>>" << endl;
     start = clock();
@@ -221,12 +238,12 @@ int main()
     sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
 
     cout << endl << "Merge sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr5, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
 
     delete [] arr1;
     delete [] arr2;
     delete [] arr3;
     delete [] arr4;
     delete [] arr5;
-
     return 0;
 }
