@@ -21,6 +21,43 @@ void bubbleSort(int numbers, int arr[])
     }
 }
 
+void quicksort(int arr[], int left, int right)
+{
+    int middle = arr[(left + right) / 2];
+    int i = 0, j = 0, temp = 0;
+    i = left;
+    j = right;
+
+    do
+    {
+        while (arr[i] < middle)
+        {
+            i++;
+        }
+        while (arr[j] > middle)
+        {
+            j--;
+        }
+        if (i <= j)
+        {
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }while(i <= j);
+
+    if (j > left)
+    {
+        quicksort(arr, left, j);
+    }
+    if (i < right)
+    {
+        quicksort(arr, i, right);
+    }
+}
+
 int main()
 {
     int numbers = 0;
@@ -33,12 +70,14 @@ int main()
     cin >> numbers;
 
     int *arr1 = new int [numbers];
+    int *arr2 = new int [numbers];
 
     srand(time(NULL));
 
     for (int i = 0; i < numbers; i++)
     {
         arr1[i] = rand()%100000 + 1;
+        arr2[i] = arr1[i];
     }
 
     cout << endl;
@@ -50,7 +89,16 @@ int main()
 
     cout << endl << "Bubble sort time: " << sortingTime << " s" << endl;
 
+    cout << "<<QUICKSORT>>" << endl;
+    start = clock();
+    quicksort(arr2, 0, numbers - 1);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Quicksort time: " << sortingTime << " s" << endl;
+
     delete [] arr1;
+    delete [] arr2;
 
     return 0;
 }
