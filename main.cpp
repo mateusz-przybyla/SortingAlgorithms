@@ -78,6 +78,24 @@ void selectionSort(int numbers, int arr[])
     }
 }
 
+void insertionSort(int numbers, int arr[])
+{
+    int j = 0, temp = 0;
+
+    for (int i = 1; i < numbers; i++)
+    {
+        temp = arr[i];
+        j = i - 1;
+
+        while (j >= 0 && arr[j] > temp)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = temp;
+    }
+}
+
 int main()
 {
     int numbers = 0;
@@ -92,13 +110,14 @@ int main()
     int *arr1 = new int [numbers];
     int *arr2 = new int [numbers];
     int *arr3 = new int [numbers];
+    int *arr4 = new int [numbers];
 
     srand(time(NULL));
 
     for (int i = 0; i < numbers; i++)
     {
         arr1[i] = rand()%100000 + 1;
-        arr2[i] = arr3[i] = arr1[i];
+        arr2[i] = arr3[i] = arr4[i] = arr1[i];
     }
 
     cout << endl;
@@ -126,9 +145,18 @@ int main()
 
     cout << endl << "Selection sort time: " << sortingTime << " s" << endl;
 
+    cout << "<<INSERTION SORT>>" << endl;
+    start = clock();
+    insertionSort(numbers, arr4);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Insertion sort time: " << sortingTime << " s" << endl;
+
     delete [] arr1;
     delete [] arr2;
     delete [] arr3;
+    delete [] arr4;
 
     return 0;
 }
