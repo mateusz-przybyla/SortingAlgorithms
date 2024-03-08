@@ -96,6 +96,66 @@ void insertionSort(int numbers, int arr[])
     }
 }
 
+void merge(int arr[], int start, int middle, int end)
+{
+    int *tempArr = new int[(end - start + 1)];
+    int i = start, j = middle + 1, k = 0;
+
+    while (i <= middle && j <= end)
+    {
+        if (arr[j] < arr[i])
+        {
+            tempArr[k] = arr[j];
+            j++;
+        }
+        else
+        {
+            tempArr[k] = arr[i];
+            i++;
+        }
+        k++;
+    }
+
+    if (i <= middle)
+    {
+        while (i <= middle)
+        {
+            tempArr[k] = arr[i];
+            i++;
+            k++;
+        }
+    }
+    else
+    {
+        while (j <= end)
+        {
+            tempArr[k] = arr[j];
+            j++;
+            k++;
+        }
+    }
+
+    for (i = 0; i <= end - start; i++)
+    {
+        arr[start + i] = tempArr[i];
+    }
+
+    delete [] tempArr;
+}
+
+void mergeSort(int arr[], int start, int end)
+{
+    int middle = 0;
+
+    if (start != end)
+    {
+        middle = (start + end) / 2;
+        mergeSort(arr, start, middle);
+        mergeSort(arr, middle + 1, end);
+        merge(arr, start, middle, end);
+    }
+}
+
 int main()
 {
     int numbers = 0;
@@ -111,13 +171,14 @@ int main()
     int *arr2 = new int [numbers];
     int *arr3 = new int [numbers];
     int *arr4 = new int [numbers];
+    int *arr5 = new int [numbers];
 
     srand(time(NULL));
 
     for (int i = 0; i < numbers; i++)
     {
         arr1[i] = rand()%100000 + 1;
-        arr2[i] = arr3[i] = arr4[i] = arr1[i];
+        arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr1[i];
     }
 
     cout << endl;
@@ -153,10 +214,19 @@ int main()
 
     cout << endl << "Insertion sort time: " << sortingTime << " s" << endl;
 
+    cout << "<<MERGE SORT>>" << endl;
+    start = clock();
+    mergeSort(arr5, 0, numbers - 1);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Merge sort time: " << sortingTime << " s" << endl;
+
     delete [] arr1;
     delete [] arr2;
     delete [] arr3;
     delete [] arr4;
+    delete [] arr5;
 
     return 0;
 }
