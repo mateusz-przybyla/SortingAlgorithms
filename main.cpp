@@ -58,6 +58,26 @@ void quicksort(int arr[], int left, int right)
     }
 }
 
+void selectionSort(int numbers, int arr[])
+{
+    int minIndex = 0, temp = 0;
+
+    for (int i = 0; i < numbers - 1; i++)
+    {
+        minIndex = i;
+        for (int j = i + 1; j < numbers; j++)
+        {
+            if (arr[j] < arr[minIndex])
+            {
+                minIndex = j;
+            }
+        }
+        temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+}
+
 int main()
 {
     int numbers = 0;
@@ -71,13 +91,14 @@ int main()
 
     int *arr1 = new int [numbers];
     int *arr2 = new int [numbers];
+    int *arr3 = new int [numbers];
 
     srand(time(NULL));
 
     for (int i = 0; i < numbers; i++)
     {
         arr1[i] = rand()%100000 + 1;
-        arr2[i] = arr1[i];
+        arr2[i] = arr3[i] = arr1[i];
     }
 
     cout << endl;
@@ -97,8 +118,17 @@ int main()
 
     cout << endl << "Quicksort time: " << sortingTime << " s" << endl;
 
+    cout << "<<SELECTION SORT>>" << endl;
+    start = clock();
+    selectionSort(numbers, arr3);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Selection sort time: " << sortingTime << " s" << endl;
+
     delete [] arr1;
     delete [] arr2;
+    delete [] arr3;
 
     return 0;
 }
