@@ -43,6 +43,6 @@ What do you think which one is the fastest?
 
 ### Useful resources
 
-- [](https://www.geeksforgeeks.org/sorting-algorithms/)
-- [](https://www.programiz.com/dsa/sorting-algorithm)
-- [](https://www.algorytm.edu.pl/algorytmy-maturalne.html)
+- https://www.geeksforgeeks.org/sorting-algorithms/
+- https://www.programiz.com/dsa/sorting-algorithm
+- https://www.algorytm.edu.pl/algorytmy-maturalne.html
