@@ -3,6 +3,94 @@
 
 using namespace std;
 
+void bubbleSort(int numbers, int arr[]);
+void quicksort(int arr[], int left, int right);
+void selectionSort(int numbers, int arr[]);
+void insertionSort(int numbers, int arr[]);
+void merge(int arr[], int start, int middle, int end);
+void mergeSort(int arr[], int start, int end);
+bool checkIfArrayIsSorted(int arr[], int numbers);
+
+int main()
+{
+    int numbers = 0;
+    clock_t start, stop;
+    double sortingTime = 0;
+
+    cout << ">>>> COMPARISON OF SORTING ALGORITHMS <<<<" << endl;
+    cout << "==========================================" << endl << endl;
+    cout << "Enter the number of elements: ";
+    cin >> numbers;
+
+    int *arr1 = new int [numbers];
+    int *arr2 = new int [numbers];
+    int *arr3 = new int [numbers];
+    int *arr4 = new int [numbers];
+    int *arr5 = new int [numbers];
+
+    srand(time(NULL));
+
+    for (int i = 0; i < numbers; i++)
+    {
+        arr1[i] = rand()%100000 + 1;
+        arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr1[i];
+    }
+
+    cout << endl;
+    cout << "<<BUBBLE SORT>>" << endl;
+    start = clock();
+    bubbleSort(numbers, arr1);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Bubble sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr1, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
+
+    cout << "<<QUICKSORT>>" << endl;
+    start = clock();
+    quicksort(arr2, 0, numbers - 1);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Quicksort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr2, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
+
+    cout << "<<SELECTION SORT>>" << endl;
+    start = clock();
+    selectionSort(numbers, arr3);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Selection sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr3, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
+
+    cout << "<<INSERTION SORT>>" << endl;
+    start = clock();
+    insertionSort(numbers, arr4);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Insertion sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr4, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
+
+    cout << "<<MERGE SORT>>" << endl;
+    start = clock();
+    mergeSort(arr5, 0, numbers - 1);
+    stop = clock();
+    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
+
+    cout << endl << "Merge sort time: " << sortingTime << " s" << endl;
+    cout << (checkIfArrayIsSorted(arr5, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
+
+    delete [] arr1;
+    delete [] arr2;
+    delete [] arr3;
+    delete [] arr4;
+    delete [] arr5;
+
+    return 0;
+}
+
 void bubbleSort(int numbers, int arr[])
 {
     int temp = 0;
@@ -167,83 +255,4 @@ bool checkIfArrayIsSorted(int arr[], int numbers)
         }
     }
     return isSorted;
-}
-
-int main()
-{
-    int numbers = 0;
-    clock_t start, stop;
-    double sortingTime = 0;
-
-    cout << ">>>> COMPARISON OF SORTING ALGORITHMS <<<<" << endl;
-    cout << "==========================================" << endl << endl;
-    cout << "Enter the number of elements: ";
-    cin >> numbers;
-
-    int *arr1 = new int [numbers];
-    int *arr2 = new int [numbers];
-    int *arr3 = new int [numbers];
-    int *arr4 = new int [numbers];
-    int *arr5 = new int [numbers];
-
-    srand(time(NULL));
-
-    for (int i = 0; i < numbers; i++)
-    {
-        arr1[i] = rand()%100000 + 1;
-        arr2[i] = arr3[i] = arr4[i] = arr5[i] = arr1[i];
-    }
-
-    cout << endl;
-    cout << "<<BUBBLE SORT>>" << endl;
-    start = clock();
-    bubbleSort(numbers, arr1);
-    stop = clock();
-    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
-
-    cout << endl << "Bubble sort time: " << sortingTime << " s" << endl;
-    cout << (checkIfArrayIsSorted(arr1, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
-
-    cout << "<<QUICKSORT>>" << endl;
-    start = clock();
-    quicksort(arr2, 0, numbers - 1);
-    stop = clock();
-    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
-
-    cout << endl << "Quicksort time: " << sortingTime << " s" << endl;
-    cout << (checkIfArrayIsSorted(arr2, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
-
-    cout << "<<SELECTION SORT>>" << endl;
-    start = clock();
-    selectionSort(numbers, arr3);
-    stop = clock();
-    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
-
-    cout << endl << "Selection sort time: " << sortingTime << " s" << endl;
-    cout << (checkIfArrayIsSorted(arr3, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
-
-    cout << "<<INSERTION SORT>>" << endl;
-    start = clock();
-    insertionSort(numbers, arr4);
-    stop = clock();
-    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
-
-    cout << endl << "Insertion sort time: " << sortingTime << " s" << endl;
-    cout << (checkIfArrayIsSorted(arr4, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
-
-    cout << "<<MERGE SORT>>" << endl;
-    start = clock();
-    mergeSort(arr5, 0, numbers - 1);
-    stop = clock();
-    sortingTime = (double)(stop - start) / CLOCKS_PER_SEC;
-
-    cout << endl << "Merge sort time: " << sortingTime << " s" << endl;
-    cout << (checkIfArrayIsSorted(arr5, numbers) ? "YES, array is sorted." : "NO, array is not sorted.") << endl << endl;
-
-    delete [] arr1;
-    delete [] arr2;
-    delete [] arr3;
-    delete [] arr4;
-    delete [] arr5;
-    return 0;
 }
